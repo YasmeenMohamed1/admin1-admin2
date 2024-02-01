@@ -1,0 +1,50 @@
+////////////////
+
+vi mycv
+i
+(esc+:wq)
+
+///////////////////
+
+down:(j)
+
+up:(k)
+
+search:(/Age)
+
+line5: (:5)
+
+Delete:
+       (dd)
+and
+       (:5)
+       (dd)
+
+insert at end: (A)
+
+//////////////////////
+
+cat /etc/shells
+
+////////////
+
+env
+
+
+//////////
+
+echo $PATH
+
+///////////
+
+echo $SHELL
+
+/////////
+
+echo "Today's date is: $(date)"
+
+export PS1=":\w\$ "
+
+/////////////////
+
+alias ls="ls -l"

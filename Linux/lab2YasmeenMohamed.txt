@@ -1,0 +1,38 @@
+cd ../..
+cd /
+cd ~
+cd
+
+cd /usr/bin 
+ls w*
+or
+ls /usr/bin/w*
+
+man passwd;man 5 passwd
+
+man passwd
+
+man -k passwd
+
+
+//////////////lab2///////////////
+
+useradd -c "Islam Asker" islam
+passwd islam
+
+useradd -c "Bad User" baduser
+passwd baduser
+
+groupadd pgroup -g 30000
+
+groupadd badgroup
+
+usermod -aG pgroup islam
+
+chage -E 25/1/2024 islam
+
+passwd -l baduser
+
+userdel baduser
+
+groupdel badgroup

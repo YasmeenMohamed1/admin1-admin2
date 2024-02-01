@@ -1,0 +1,75 @@
+///1//
+sudo vi /etc/httpd/conf/httpd.conf
+
+//uncomment this line
+
+LoadModule mpm_worker_module modules/mod_mpm_worker.so
+
+<IfModule mpm_worker_module>
+    StartServers 2
+    MaxRequestWorkers 150
+    MinSpareThreads 25
+    MaxSpareThreads 75
+    ThreadsPerChild 25
+</IfModule>
+
+systemctl restart httpd
+
+
+///2//
+
+httpd -M | grep rewrite
+
+sudo systemctl restart httpd
+
+////3///
+
+sudo vi .htacess
+a-
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "^forbidden"
+RewriteRule "^(.*)$" "page1.html"  [L]
+
+b-
+RewriteEngine On
+RewriteCond %{QUERY_STRING} (.+)
+RewriteRule ^(.*)$ /web3/$1? [L,R=301]
+
+c-
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "val"
+RewriteRule ^/page1.html$ /page2.html [L,R=301]
+
+d-
+RewriteEngine On
+RewriteCond %{QUERY_STRING} var=([^&]+)&([^&]+)
+RewriteRule ^([^?]+)$ /$1/%1/%2? [L,R=301]
+
+f-
+RewriteEngine On
+RewriteCond %{TIME_HOUR} >18
+RewriteRule ^(.*)$ /goodevening.html [L]
+
+RewriteCond %{TIME_HOUR} <6
+RewriteRule ^(.*)$ /goodmorning.html [L]
+
+///4///
+
+sudo nano /etc/httpd/conf/httpd.conf
+
+<VirtualHost *:80>
+    ServerName os.iti.gov.eg
+    DocumentRoot /var/www/os-iti
+
+    <Directory /var/www/os-iti>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    RewriteEngine On
+    RewriteRule ^(.*)$ /local-directory/$1 [L]
+</VirtualHost>
+
+
+systemctl restart httpd

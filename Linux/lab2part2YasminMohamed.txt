@@ -1,0 +1,52 @@
+/////////13////////////
+
+useradd yasmeen1
+passwd yasmeen1
+useradd yasmeen2
+passwd yasmeen2
+su yasmeen1
+mkdir myteam
+ls -ld myteam
+chmod a=r myteam
+
+///////14///////////////
+
+su yasmeen2
+
+///////15///////////
+
+cd myteam
+"permission error"
+
+////////16///////////
+chmod u=rw,g=wx,o=x oldpasswd
+or
+chmod 631 oldpasswd
+
+umask 146
+file(r--)
+directory(rwx)
+umask 000
+
+///////17/////////////
+
+directory:
+source (r-x) 
+target parent (-wx)
+
+file:
+source (r--)
+target parent(-wx)
+
+Delete a file (-w-)
+
+Change to a directory (--x)
+
+List a directory content (r-x)
+
+View a file content  (r--)
+
+Modify a file content(-w-)
+////////////18////////////////////
+touch text
+chmod 444 text

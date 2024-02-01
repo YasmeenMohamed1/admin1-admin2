@@ -1,0 +1,40 @@
+mkdir -p dir1/dir11 dir1/dir12
+touch dir1/dir11/file1
+ls -R
+
+
+mkdir docs
+touch docs/mycv
+ls -R
+
+
+
+rmdir dir1/dir11
+
+rm dir1/dir11/file1
+
+rmdir dir1/dir11
+
+
+
+rmdir -p dir1/dir12
+
+
+
+pwd
+
+/root/docs/mycv
+
+docs/mycv
+
+
+
+cp /etc/passwd /root/mypasswd
+
+
+mv mypasswd oldpasswd
+
+
+head -4 oldpasswd
+
+tail -7 oldpasswd

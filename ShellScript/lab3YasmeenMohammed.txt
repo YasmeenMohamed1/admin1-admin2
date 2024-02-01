@@ -1,0 +1,206 @@
+/1
+#!/bin/bash
+
+echo "Enter a character: "
+read char
+
+case "$char" in
+    [A-Z])
+        echo "Upper Case"
+        ;;
+    [a-z])
+        echo "Lower Case"
+        ;;
+    [0-9])
+        echo "Number"
+        ;;
+    *)
+        echo "Nothing"
+        ;;
+esac
+
+/2
+
+#!/bin/bash
+
+echo "Enter a string: "
+read string
+
+if [[ -z "$string" ]]; then
+    echo "Nothing"
+    exit 0
+fi
+
+has_upper=false
+has_lower=false
+has_number=false
+
+for ((i = 0; i < ${#string}; i++)); do
+    char="${string:i:1}"
+    if [[ "$char" =~ [A-Z] ]]; then
+        has_upper=true
+    elif [[ "$char" =~ [a-z] ]]; then
+        has_lower=true
+    elif [[ "$char" =~ [0-9] ]]; then
+        has_number=true
+    fi
+done
+
+if $has_upper && $has_lower && $has_number; then
+    echo "Mix"
+elif $has_upper; then
+    echo "Upper Cases"
+elif $has_lower; then
+    echo "Lower Cases"
+elif $has_number; then
+    echo "Numbers"
+fi
+
+/3
+
+#!/bin/bash
+
+for file in "$HOME"/*; do
+    if [[ -f "$file" || -d "$file" ]]; then
+        chmod +x "$file"
+    fi
+done
+
+/4
+
+#!/bin/bash
+
+backup_dir="/path/to/backup/directory"
+
+if [[ ! -d "$backup_dir" ]]; then
+    mkdir -p "$backup_dir"
+fi
+
+for file in "$HOME"/*; do
+    if [[ -f "$file" ]]; then
+        cp "$file" "$backup_dir"
+    fi
+done
+
+/5
+
+#!/bin/bash
+
+mtemplate="/path/to/mtemplate"
+
+while IFS= read -r user; do
+    mail -s "Subject" "$user" < "$mtemplate"
+done < <(cut -d: -f1 /etc/passwd)
+
+/6
+
+#!/bin/bash
+
+while true; do
+    new_mail_count=$(grep -c "^From:" /var/mail/$(whoami))
+    echo "New mails: $new_mail_count"
+    sleep 10
+done
+
+/7
+
+typeset -i n1
+typeset -i n2
+n1=1
+n2=1
+
+while [ $n1 -eq $n2 ]; do
+    n2=$n2+1
+    echo $n1
+
+    if [ $n1 -gt $n2 ]; then
+        break
+    else
+        continue
+    fi
+
+    n1=$n1+1
+    echo $n2
+done
+
+/8
+
+#!/bin/bash
+
+while true; do
+    echo "Menu:"
+    echo "a. Press 1 to ls"
+    echo "b. Press 2 to ls -a"
+    echo "c. Press 3 to exit"
+
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1)
+            ls
+            ;;
+        2)
+            ls -a
+            ;;
+        3)
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+done
+
+/9
+
+#!/bin/bash
+
+read -p "Enter the number of elements: " num_elements
+
+declare -a my_array
+
+for ((i = 0; i < num_elements; i++)); do
+    read -p "Enter element $((i+1)): " element
+    my_array[i]=$element
+done
+
+echo "Array elements:"
+for element in "${my_array[@]}"; do
+    echo "$element"
+done
+
+/10
+
+#!/bin/bash
+
+read -p "Enter the number of elements: " num_elements
+
+declare -a my_array
+
+for ((i = 0; i < num_elements; i++)); do
+    read -p "Enter number $((i+1)): " number
+    my_array[i]=$number
+done
+
+sum=0
+
+for number in "${my_array[@]}"; do
+    sum=$((sum + number))
+done
+
+average=$((sum / num_elements))
+echo "Average: $average"
+
+/11
+
+#!/bin/bash
+
+mysq() {
+    local num=$1
+    local square=$((num * num))
+    echo "Square of $num is $square"
+}
+
+mysq 5
+
+

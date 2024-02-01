@@ -1,0 +1,21 @@
+///4///
+
+sudo vi .htaccess
+
+<FilesMatch "\.pdf$">
+  AuthType Basic
+  AuthName "PDF Access"
+  AuthUserFile /etc/httpd/.htpasswd
+  Require valid-user
+</FilesMatch>
+
+sudo systemctl restart httpd
+
+sudo nano /etc/httpd/conf/httpd.conf
+
+<Directory "/var/www/html/web1">
+ Options Indexes FollowSymLinks
+    AllowOverride All
+</Directory>
+
+sudo systemctl restart httpd

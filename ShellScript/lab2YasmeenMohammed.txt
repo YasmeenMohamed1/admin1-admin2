@@ -1,0 +1,193 @@
+/1
+vi hello.sh
+
+#!/bin/bash
+echo "Hello,please enter your name"
+read name
+echo "Welcome $name"
+
+
+chmod +x hello.sh
+./hello.sh
+
+/2
+vi s1.sh
+
+#!/bin/bash
+echo "first script is called"
+x="5"
+source s2.sh
+
+
+vi s2.sh 
+
+#!/bin/bash
+echo "second script is called"
+echo $x
+
+chmod +x s1.sh s2.sh
+
+./s1.sh
+
+/***************OR*****************/
+vi s1.sh
+
+#!/bin/bash
+echo "first script is called"
+x="5"
+./s2.sh $x
+
+
+vi s2.sh 
+
+#!/bin/bash
+echo "second script is called"
+echo $1
+
+chmod +x s1.sh s2.sh
+
+./s1.sh
+
+
+
+/3
+vi mycp.sh
+
+#!/bin/bash
+cp $*
+
+
+chmod +x mycp.sh
+
+./mycp.sh hello.sh hellocopy.sh
+
+./mycp.sh s1.sh s2.sh Desktop/
+
+
+/4	
+vi mycd.sh
+
+#!/bin/bash
+if [ $# -eq 0 ];
+then
+        cd /home/yasmeen/
+else
+        cd $1
+fi
+
+
+chmod +x mycd.sh
+
+source ./mycd.sh
+source ./mycd.sh /home/yasmeen/Documents
+/5
+vi myls.sh
+
+#!/bin/bash
+if [ $# -eq 0 ];
+then
+        ls
+else
+        ls $1
+fi
+
+source ./myls.sh
+source ./myls.sh /home/yasmeen/Documents
+/6
+vi myls2.sh
+
+#!/bin/bash
+if [ $# -eq 0 ];
+then
+        ls
+else
+        if [ $1 == "-l" ];
+        then
+                echo "list in long format"
+        elif [ $1 == "-a" ];
+        then
+                echo "list in long format"
+        elif [ $1 == "-d" ];
+        then
+                echo "if an argument is a directory, list only its name"
+        elif [ $1 == "-i" ];
+        then
+                echo "print inode number"
+        elif [ $1 == "-R" ];
+        then
+                echo "recursively list subdirectories"
+        else
+                ls $1
+        fi
+fi
+
+
+source ./myls2.sh 
+source ./myls2.sh -R
+source ./myls2.sh -l
+source ./myls2.sh -a
+source ./myls2.sh /home/yasmeen/Documents
+/7
+vi mytest.sh
+
+#!/bin/bash
+if [ -f $1 ];
+then
+        echo "This is file"
+fi
+
+if [ -d $1 ];
+then
+        echo "This is Directory"
+fi
+
+if [ -r $1 ];
+then
+        echo "This is readable"
+fi
+
+if [ -x $1 ];
+then
+        echo "This is executable"
+fi
+
+if [ -w $1 ];
+then
+        echo "This is writable"
+fi
+
+chmod +x mytest.sh
+
+./mytest.sh s2.sh
+
+./mytest.sh Desktop
+/8
+vi myinfo.sh
+
+#!/bin/bash
+
+read -p "please Enter your logname = " name
+
+if sed -n "/^$name:/p" /etc/passwd;
+then
+       line=$(sed -n "/^$name:/p" /etc/passwd)
+       home=$(echo "$line" | awk -F: '{print $6}')
+       files=$(ls -l "$home")
+       echo "$files"
+
+       cp -r $(ls "$home") /tmp/
+
+
+
+else
+        echo "error"
+fi
+
+
+chmod +x myinfo.sh
+
+ ./myinfo.sh
+ls /tmp
+
+
+

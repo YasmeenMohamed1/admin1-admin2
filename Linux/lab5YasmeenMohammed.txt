@@ -1,0 +1,33 @@
+1-gzip yasmeen.txt
+
+gzip -d yasmeen.txt.gz
+
+zip yasmeen2.zip yasmeen.txt 
+
+unzip yasmeen2.zip
+///////////////////
+2- tar -tvf "compressed file name" 
+//////////////////////////
+3-tar -cvf backup.tar /etc
+///////////////////////
+5-sudo ls -lR /etc | grep root
+//////////////////
+6-ls -l | grep d
+///////////////////
+9- ls -i /  ***  ls -i /etc/  *** ls -i /etc/hosts
+//////////////////
+10- cp /etc/passwd /home/yasmeen/    
+////////////
+diff /etc/passwd passwd 
+38a39
+> yasmeen
+//////////////
+cmp /etc/passwd passwd 
+cmp: EOF on /etc/passwd after byte 2159, line 38
+
+11-ln -s /etc/passwd  /boot
+ln: failed to create symbolic link '/boot/passwd': Permission denied
+///////////////////////////
+12-ln /etc/passwd  /boot
+ln: failed to create hard link '/boot/passwd' => '/etc/passwd': Invalid cross-device link
+
