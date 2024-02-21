@@ -1,0 +1,115 @@
+///1///
+sudo useradd -m -s /bin/bash user1
+sudo passwd user1
+
+cont...
+
+///2///
+
+sudo groupadd -g 10000 sales
+sudo groupadd -g 10001 hr
+sudo groupadd -g 10002 web
+
+///3///
+sudo usermod -aG sales user1 user2
+sudo usermod -aG hr user3 user4
+sudo usermod -aG web user5 user6
+sudo usermod -aG sales,hr,web user7
+
+///4///
+id user1
+uid=1002(user1) gid=1002(user1) groups=1002(user1)
+id user2
+uid=1003(user2) gid=1003(user2) groups=1003(user2)
+id user3
+uid=1004(user3) gid=1004(user3) groups=1004(user3)
+id user4
+uid=1005(user4) gid=1005(user4) groups=1005(user4)
+id user5
+uid=1006(user5) gid=1006(user5) groups=1006(user5)
+id user6
+uid=1007(user6) gid=1007(user6) groups=1007(user6)
+id user7
+uid=1008(user7) gid=1008(user7) groups=1008(user7),10000(sales),10001(hr),10002(web)
+
+(different way )
+grep 'sales' /etc/group
+sales:x:10000:user7
+grep 'hr' /etc/group
+chrony:x:979:
+hr:x:10001:user7
+
+grep 'web' /etc/group
+web:x:10002:user7
+
+
+///5///
+sudo mkdir -p /depts/{sales,hr,web}
+
+///7///
+sudo chmod 755 /depts
+sudo chmod 770 /depts/sales /depts/hr /depts/web
+
+///8///
+sudo chmod g+s /depts/*
+
+///9///
+su - user2
+touch /depts/hr/ user2.txt 
+touch: setting times of '/depts/hr/': Permission denied
+sudo touch /depts/hr/ user2.txt
+sudo touch /depts/web/ user2.txt 
+[sudo] password for user2: 
+user2 is not in the sudoers file.  This incident will be reported.
+///10///
+sudo visudo
+user3 ALL=(root) /bin/mount, /bin/umount
+user4 ALL=(root) /bin/mount, /bin/umount
+user5 ALL=(root) /sbin/fdisk
+///11///
+sudo umount /boot
+sudo umount /boot
+
+///12///
+sudo mount -o remount /boot
+sudo fdisk -l
+
+///13///
+mkdir dir
+chmod 770 dir
+chmod g+rX dir
+ls -l
+
+///14///
+touch dir/file
+chmod g+rw dir/file
+///15///
+chmod g+s dir
+///16///
+sudo mkdir -p /opt/research 
+sudo chown root:root /opt/research
+sudo chmod 770 /opt/research
+sudo chmod g+s /opt/research
+sudo chmod g+w /opt/research
+sudo chmod 660 /opt/research
+sudo setfacl -d -m group:profs:rw /opt/research
+sudo setfacl -d -m group:grads:rw /opt/research
+sudo setfacl -d -m group:interns:r /opt/research
+sudo setfacl -m g:grads:rwX /opt/research
+sudo setfacl grads:rwX /opt/research
+///17///
+sudo nano /etc/selinux/config
+SELINUX=permissive
+sudo reboot
+///18///
+sestatus
+///19///
+SELINUX=enforcing
+///20///
+sudo setenforce 1
+///21///
+sudo cp /etc/resolv.conf /root/
+///23///
+sudo mv /root/resolv.conf /etc/resolv.conf
+///24///
+ls -Z /etc/resolv.conf

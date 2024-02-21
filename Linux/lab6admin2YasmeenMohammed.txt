@@ -1,0 +1,148 @@
+///1///
+systemctl list-unit-files --type=service
+
+
+///2///
+systemctl set-default multi-user.target
+Removed "/etc/systemd/system/default.target".
+Created symlink /etc/systemd/system/default.target → /usr/lib/systemd/system/multi-user.target.
+reboot
+
+///3///
+mail -s "hello root" root
+
+///4///
+(first way)
+mail
+
+(second way)
+cat /var/spool/mail/root
+
+///5///
+
+systemctl stop postfix
+
+///6///
+mail -s "when i stoped postfix" root
+
+///7///
+su -
+mail
+cat /var/spool/mail/root
+
+
+///8///
+systemctl start postfix
+///9///
+mail -s "after starting postfix" root
+^D
+tail -10 /var/mail/root
+///10///
+sudo nano /etc/default/grub
+GRUB_TIMEOUT=20
+
+///11///
+sudo nano /etc/default/grub
+GRUB_DEFAULT="Ubuntu".
+
+///12///
+
+vi date.sh
+#!/bin/bash
+
+while true; do
+    current_time=$(date +"%H:%M")
+
+    if [[ "$current_time" > "08:00" && "$current_time" < "17:00" ]]; then
+        echo "System information at $current_time:"
+        echo "------------"
+        echo "Memory Usage:"
+        free -h
+        echo
+        echo "CPU Usage:"
+        top -bn1 | grep "Cpu(s)"
+        echo
+        echo "Disk Usage:"
+        df -h
+        echo
+        echo "----------"
+    fi
+
+    sleep 600 # Sleep for 10 minutes (600 seconds)
+done
+chmod +x date.sh
+./date.sh
+///13///
+su -
+mail 
+n 
+p 
+d 
+q 
+
+///13///
+ls > output.txt
+crontab -e
+0 8-17 * * * mail -s "Cron Job Output" ym791190@gmail.com < ~/output.txt
+
+///15///
+mail
+Use n to view the next email.
+Use p to view the previous email.
+Use d to delete an email.
+Use q to quit the mail interface.
+
+
+///17///
+gnuplot
+bash: gnuplot: command not found...
+Packages providing this file are:
+'gnuplot'
+'gnuplot-minimal'
+
+///18///
+ yum search plotting
+
+///19///
+yum info gnuplot
+
+///20///
+sudo yum install gnuplot
+
+///21///
+sudo yum remove gnuplot --assumeno
+
+///22///
+rpm -qa
+
+///23///
+rpm -ql initscripts
+
+///24///
+rpm -qi bash
+
+///25///
+rpm -V pam
+
+///26///
+rpm -qa | grep gnome
+
+///27///
+sudo yum install name
+
+///28///
+sudo yum install krita
+
+///29///
+sudo mkdir /media/iso
+sudo mount -o loop /path/to/he.iso /media/iso
+[cdrom]
+name=RHEL CD
+baseurl=file:
+gpgcheck=1
+gpgkey=file:
+
+sudo umount /media/iso
+
+///30///
+sudo yum makecache
