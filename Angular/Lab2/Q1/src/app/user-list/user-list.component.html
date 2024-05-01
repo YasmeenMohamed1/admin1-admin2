@@ -1,0 +1,17 @@
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  @for(user of users ;track user.id){
+  <div class="card">
+    <img class="card-img-top" [src]="user.image" alt="Profile Picture">
+    <div class="card-body">
+      <h5 class="card-title">{{ user.username }}</h5>
+      <p class="card-text">Email: {{ user.email }}</p>
+      <p class="card-text">Phone: {{ user.phone }}</p>
+      <i class="fa fa-star"  [ngClass]="{ 'verified': user.is_verified, 'notverified': !user.is_verified }"></i>
+    </div>
+  </div>
+}
+</div>
+
+
+
