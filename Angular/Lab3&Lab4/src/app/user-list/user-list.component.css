@@ -1,0 +1,23 @@
+.card {
+  width: 18rem;
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+.fa-star {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.verified {
+  color: green;
+}
+
+.notverified {
+  color: red;
+}
+

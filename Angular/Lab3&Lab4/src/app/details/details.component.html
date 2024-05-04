@@ -1,0 +1,57 @@
+<div class="container mt-5 py-4 px-xl-5 mt-5">
+  <div class="row mb-4">
+    <div class="col-lg-6">
+      <div >
+        <div>
+            <img [src]="productDetails.images[1]" class="d-block w-100" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mt-5">
+      <div class="d-flex flex-column h-100 mb-5">
+        <h2 class="mb-4">{{ productDetails.title }}</h2>
+        <p>{{ productDetails.description }}</p>
+        <div class="row g-3 mb-4 align-items-center mt-4 mb-4">
+          <div class="col">
+            <div class="d-flex align-items-center mb-4" style="font-size: 1.2rem;">
+              <del class="text-dark me-2">{{'$' + productDetails.price}}</del>
+              <span class="text-muted me-2">
+                {{'$' + (productDetails.price - (productDetails.price * productDetails.discountPercentage) / 100)}}
+              </span>
+              <span class="text-danger">
+                ({{productDetails.discountPercentage}}% off)
+              </span>
+            </div>
+
+              <div class="mb-3">
+                <input type="number" class="form-control w-50" min="1">
+                <button class="btn btn-outline-dark mt-2">Add to Cart</button>
+              </div>
+
+
+          </div>
+        </div>
+        <h4 class="mb-0 mt-5">Details</h4>
+        <hr />
+        <dl class="row">
+          <dt class="col-sm-4">Category</dt>
+          <dd class="col-sm-8">
+            <p class="lead">{{ productDetails.category }}</p>
+          </dd>
+          <dt class="col-sm-4">Brand</dt>
+          <dd class="col-sm-8">
+            <p class="lead">{{ productDetails.brand }}</p>
+          </dd>
+          <dt class="col-sm-4">Stock</dt>
+          <dd class="col-sm-8">
+            <p class="lead">{{ productDetails.stock }}</p>
+          </dd>
+          <dt class="col-sm-4">Description</dt>
+          <dd class="col-sm-8">
+            <p class="lead">{{ productDetails.description }}</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
