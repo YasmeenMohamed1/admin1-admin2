@@ -1,0 +1,35 @@
+{% extends 'basic_structure.html'%}
+
+{%block title%} Book List {%endblock%}
+
+{%block address%} Book List  {%endblock%}
+
+{%block content%}
+
+<table border="2" width="85%" class="mx-auto  mb-5">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Actions</th>
+    </tr>
+
+    {%for book in books%}
+        <tr >
+            <td>{{book.id}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.latest_version}}</td>
+            <td>
+                <a href="{% url 'details_of_books' book.name %}" class="btn btn-primary">show details</a>
+                <a href="{% url 'update_book' book.id%}" class="btn btn-success">Update</a>
+                <a href="{% url 'delete_book' book.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+
+
+    {%endfor%}
+
+</table>
+
+{% endblock %}
+
